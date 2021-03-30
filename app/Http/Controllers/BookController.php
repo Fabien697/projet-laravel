@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Author;
+use App\Http\Resources\BookResource;
+
 
 class BookController extends Controller
 {
@@ -41,6 +43,11 @@ class BookController extends Controller
         $book->publication_year = $request->publication_year;
         $book->save();
         return redirect('/list');
+    }
+
+    public static function show(Book $book)
+    {
+        return response()->json($book, 200);
     }
 
 }
