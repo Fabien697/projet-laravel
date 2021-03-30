@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gender;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class GenderController extends Controller
 {
     
     /**
