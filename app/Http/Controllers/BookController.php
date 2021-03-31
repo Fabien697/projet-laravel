@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Author;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\BookCollection;
 
 
 class BookController extends Controller

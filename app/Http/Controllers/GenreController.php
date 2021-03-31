@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Genre;
+use App\Http\Resources\GenreResource;
+use App\Http\Resources\GenreCollection;
 use Illuminate\Http\Request;
 
 class GenderController extends Controller
