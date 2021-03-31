@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Gender;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class GenderController extends Controller
@@ -15,7 +15,7 @@ class GenderController extends Controller
      */
     public function index()
     {
-        return new GenderCollection(Gender::all());
+        return new GenreCollection(Genre::all());
     }
 
     /**
@@ -26,44 +26,44 @@ class GenderController extends Controller
      */
     public function store(Request $request)
     {
-        $newGender = Gender::addGender($request->all());
-        return response()->json($newGender, 201);
+        $newGender = Genre::addGenre($request->all());
+        return response()->json($newGenre, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Gender $gender
+     * @param  Genre $genre
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Gender $gender)
+    public function show(Genre $genre)
     {
-        return new GenderResource($gender);
+        return new GenreResource($genre);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Gender $gender
+     * @param  Genre $genre
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Gender $genre)
+    public function update(Request $request, Genre $genre)
     {
-        $updatedGender = Gender::updateAuthor($gender, $request->all());
+        $updatedGenre = Genre::updateAuthor($genre, $request->all());
 
-        return response()->json($updatedGender, 200);
+        return response()->json($updatedGenre, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Gender $gender
+     * @param  Genre $genre
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Gender $gender)
+    public function destroy(Genre $genre)
     {
-        $gender->delete();
+        $genre->delete();
 
         return response()->json('',204);
     }
