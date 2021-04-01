@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthorController;
 use App\Models\Author;
+use App\Http\Controllers\BookController;
+use App\Models\Book;
+use App\Http\Controllers\GenreController;
+use App\Models\Genre;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +20,10 @@ use App\Models\Author;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::resource('genres', GenreController::class);
+
+Route::resource('books', BookController::class);
 
 Route::resource('authors', AuthorController::class);
 

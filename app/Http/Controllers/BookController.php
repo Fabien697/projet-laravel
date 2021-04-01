@@ -11,6 +11,18 @@ use App\Http\Resources\BookCollection;
 
 class BookController extends Controller
 {
+    public static function index(Request $request) {
+
+        $url = $request->fullUrl();
+
+        if($url == 'http://127.0.0.1:8000/api/books?filter=title'){
+            $book = Book::filter('title');
+            return new BookCollection($book);
+        }else{
+
+        return new BookCollection(Book::paginate(5));
+        }
+    }
     public static function add(Request $request)
     {
         $book = new Book;

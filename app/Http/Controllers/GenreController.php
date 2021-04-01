@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Http\Request;
 use App\Models\Genre;
 use App\Http\Resources\GenreResource;
 use App\Http\Resources\GenreCollection;
-use Illuminate\Http\Request;
 
-class GenderController extends Controller
+class GenreController extends Controller
 {
     
     /**
@@ -16,7 +16,7 @@ class GenderController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public static function index()
     {
         return new GenreCollection(Genre::all());
     }
@@ -29,7 +29,7 @@ class GenderController extends Controller
      */
     public function store(Request $request)
     {
-        $newGender = Genre::addGenre($request->all());
+        $newGenre = Genre::addGenre($request->all());
         return response()->json($newGenre, 201);
     }
 
@@ -39,9 +39,14 @@ class GenderController extends Controller
      * @param  Genre $genre
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Genre $genre)
+    public function show($id)
     {
+        $genre = Genre::find($id);
+        if ($genre) {
         return new GenreResource($genre);
+        }else{
+            return response()->json(['message' => 'Pas de genres ici',], 404);
+        }
     }
 
     /**

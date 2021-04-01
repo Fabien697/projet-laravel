@@ -15,10 +15,27 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new AuthorCollection(Author::paginate(15));
-    }
+        $query = $request->query();
+
+
+        if(isset($query['sort'])){
+            if($query['sort'] === 'nameAsc'){
+                $authors = Author::orderBy('name', 'asc');
+                return new AuthorCollection($authors->paginate(10));
+            }
+            else if($query['sort'] === 'nameDesc'){
+                $authors = Author::orderBy('name', 'desc');
+                return new AuthorCollection($authors->paginate(10));
+            }
+        
+        } 
+        else{
+            return new AuthorCollection(Author::paginate(10));
+        }
+        
+    } 
 
     /**
      * Store a newly created resource in storage.
@@ -38,9 +55,14 @@ class AuthorController extends Controller
      * @param  Author $author
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Author $author)
+    public function show($id)
     {
+        $author = Author::find($id);
+        if ($author) {
         return new AuthorResource($author);
+        }else{
+            return response()->json(['message' => 'Pas trouver d_ID',], 404);
+        }
     }
 
     /**
